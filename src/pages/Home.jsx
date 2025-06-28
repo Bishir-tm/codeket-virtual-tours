@@ -28,11 +28,13 @@ import {
   TrendingUp,
   EyeOff,
 } from "lucide-react";
+import BookingModal from "../components/BookingModal";
 
 const CodeketLanding = () => {
   const [theme, setTheme] = useState("dark");
   const [showSampleTour, setShowSampleTour] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -685,11 +687,19 @@ const CodeketLanding = () => {
               </a>
             </div>
 
-            <button className="group btn btn-secondary btn-lg px-12 hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-secondary/25">
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
+              className="group btn btn-secondary btn-lg px-12 hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-secondary/25"
+            >
               <Camera className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
               Book a Walkthrough Now
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
+
+            <BookingModal
+              isOpen={isBookingModalOpen}
+              onClose={() => setIsBookingModalOpen(false)}
+            />
 
             <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-base-content/60">
               <div className="flex items-center gap-2">
