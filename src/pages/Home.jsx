@@ -26,10 +26,12 @@ import {
   CheckCircle2,
   Award,
   TrendingUp,
+  EyeOff,
 } from "lucide-react";
 
 const CodeketLanding = () => {
   const [theme, setTheme] = useState("dark");
+  const [showSampleTour, setShowSampleTour] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -270,7 +272,7 @@ const CodeketLanding = () => {
                 {theme === "light" ? "🌙" : "☀️"}
               </button>
               <a
-                href="tel:+234XXXXXXXXXX"
+                href="tel:+2349068149540"
                 className="btn btn-primary px-6 hover:scale-105 transition-transform"
               >
                 <Phone className="w-4 h-4 mr-2" />
@@ -286,7 +288,7 @@ const CodeketLanding = () => {
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 hover:scale-105 transition-transform">
+            <div className="inline-flex my-5 items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 hover:scale-105 transition-transform">
               <Sparkles className="w-5 h-5 text-primary animate-pulse" />
               <span className="text-sm font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Premium Virtual Tour Technology
@@ -320,10 +322,10 @@ const CodeketLanding = () => {
                 Book a Walkthrough Project
                 <ArrowRight className="w-5 h-5 ml-2" />
               </button>
-              <button className="btn btn-outline btn-lg px-8">
+              <a href="#sample-tour" className="btn btn-outline btn-lg px-8">
                 <Play className="w-5 h-5 mr-2" />
                 View Sample Tour
-              </button>
+              </a>
             </div>
 
             {/* Trust Indicators */}
@@ -575,11 +577,6 @@ const CodeketLanding = () => {
                 <p className="text-base-content/70 max-w-sm mx-auto">
                   {step.desc}
                 </p>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-full w-full">
-                    <ArrowRight className="w-8 h-8 text-base-content/30 mx-auto" />
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -587,7 +584,10 @@ const CodeketLanding = () => {
       </section>
 
       {/* Sample Tour Section */}
-      <section className="py-32 bg-gradient-to-br from-primary to-secondary text-white relative overflow-hidden">
+      <section
+        className="py-32 bg-gradient-to-br from-primary to-secondary text-white relative overflow-hidden"
+        id="sample-tour"
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
@@ -608,23 +608,42 @@ const CodeketLanding = () => {
           </p>
 
           <div className="max-w-5xl mx-auto">
-            <div className="relative group cursor-pointer">
+            <div
+              className="relative group cursor-pointer transition"
+              onClick={() => setShowSampleTour((previousVal) => !previousVal)}
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
               <div className="relative bg-black/30 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
-                <div className="aspect-video bg-gradient-to-br from-white/10 to-transparent rounded-2xl flex items-center justify-center mb-8 group-hover:from-white/20 transition-colors">
-                  <div className="text-center">
-                    <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <Play className="w-12 h-12 text-white ml-1" />
+                {showSampleTour ? (
+                  <iframe
+                    src="http://127.0.0.1:5500/"
+                    title="Codeket Virtual Tour Sample"
+                    className="aspect-video min-w-full min-h-full rounded-3xl my-3"
+                  ></iframe>
+                ) : (
+                  <div className="border-4 aspect-video bg-gradient-to-br from-white/10 to-transparent rounded-2xl flex items-center justify-center mb-8 group-hover:from-white/20 transition-colors">
+                    <div className="text-center">
+                      <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <Play className="w-12 h-12 text-white ml-1" />
+                      </div>
+                      <p className="text-lg opacity-90">
+                        Interactive 360° Tour Demo
+                      </p>
+                      <p className="text-sm opacity-70">Click to explore</p>
                     </div>
-                    <p className="text-lg opacity-90">
-                      Interactive 360° Tour Demo
-                    </p>
-                    <p className="text-sm opacity-70">Click to explore</p>
                   </div>
-                </div>
+                )}
                 <button className="btn btn-accent btn-lg px-8 hover:scale-105 transition-transform">
-                  <Eye className="w-5 h-5 mr-2" />
-                  Launch Sample Tour
+                  {showSampleTour ? (
+                    <>
+                      <EyeOff className="w-5 h-5 mr-2" />
+                      Close Sample Tour
+                    </>
+                  ) : (
+                    <>
+                      <Eye className="w-5 h-5 mr-2" /> Launch Sample Tour
+                    </>
+                  )}
                 </button>
               </div>
             </div>
