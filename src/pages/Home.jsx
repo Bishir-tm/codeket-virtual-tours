@@ -273,13 +273,17 @@ const CodeketLanding = () => {
               >
                 {theme === "light" ? "🌙" : "☀️"}
               </button>
-              <a
-                href="tel:+2349068149540"
-                className="btn btn-primary px-6 hover:scale-105 transition-transform"
+              <button
+                className="btn btn-primary btn-sm px-8"
+                onClick={() => setIsBookingModalOpen(true)}
               >
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now
-              </a>
+                <Camera className="w-5 h-5 mr-2" />
+                Let's Talk
+              </button>
+              <BookingModal
+                isOpen={isBookingModalOpen}
+                onClose={() => setIsBookingModalOpen(false)}
+              />
             </div>
           </div>
         </div>
