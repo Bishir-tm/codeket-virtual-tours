@@ -629,7 +629,7 @@ const CodeketLanding = () => {
               <div className="relative bg-black/30 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
                 {showSampleTour ? (
                   <iframe
-                    src="http://127.0.0.1:5500/"
+                    src="https://bishir-tm.github.io/sample-virtual-tour/"
                     title="Codeket Virtual Tour Sample"
                     className="aspect-video min-w-full min-h-full rounded-3xl my-3"
                   ></iframe>

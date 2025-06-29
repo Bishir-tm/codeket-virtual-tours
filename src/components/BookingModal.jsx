@@ -23,7 +23,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     const templateParams = {
       from_name: name,
       from_email: email,
-      to_name: "Codeket Virtual Tours", // You can customize this
+      to_name: "Codeket Virtual Tours",
       message: message,
     };
 
