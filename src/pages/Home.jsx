@@ -16,6 +16,7 @@ import {
   Play,
   Star,
   Globe,
+  X,
   Zap,
   Shield,
   Clock,
@@ -27,12 +28,15 @@ import {
   Award,
   TrendingUp,
   EyeOff,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import BookingModal from "../components/BookingModal";
 
 const CodeketLanding = () => {
   const [theme, setTheme] = useState("dark");
   const [showSampleTour, setShowSampleTour] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
@@ -596,7 +600,7 @@ const CodeketLanding = () => {
         </div>
       </section>
 
-      {/* Sample Tour Section */}
+      {/* Sample Tour Section  */}
       <section
         className="py-32 bg-gradient-to-br from-primary to-secondary text-white relative overflow-hidden"
         id="sample-tour"
@@ -626,13 +630,28 @@ const CodeketLanding = () => {
               onClick={() => setShowSampleTour((previousVal) => !previousVal)}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-              <div className="relative bg-black/30 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
+              <div
+                className={`relative bg-black/30 backdrop-blur-sm rounded-3xl border border-white/20 ${
+                  showSampleTour ? "p-3 md:p-6" : "p-12"
+                }`}
+              >
                 {showSampleTour ? (
-                  <iframe
-                    src="https://bishir-tm.github.io/sample-virtual-tour/"
-                    title="Codeket Virtual Tour Sample"
-                    className="aspect-video min-w-full min-h-full rounded-3xl my-3"
-                  ></iframe>
+                  <div className="relative">
+                    <iframe
+                      src="https://bishir-tm.github.io/sample-virtual-tour/"
+                      title="Codeket Virtual Tour Sample"
+                      className="w-full h-[70vh] md:h-[80vh] lg:h-[500px] rounded-2xl"
+                    ></iframe>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsFullscreen(true);
+                      }}
+                      className="absolute top-4 right-4 btn btn-sm btn-accent"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 ) : (
                   <div className="border-4 aspect-video bg-gradient-to-br from-white/10 to-transparent rounded-2xl flex items-center justify-center mb-8 group-hover:from-white/20 transition-colors">
                     <div className="text-center">
@@ -646,7 +665,11 @@ const CodeketLanding = () => {
                     </div>
                   </div>
                 )}
-                <button className="btn btn-accent btn-lg px-8 hover:scale-105 transition-transform">
+                <button
+                  className={`btn btn-accent btn-lg px-8 hover:scale-105 transition-transform ${
+                    showSampleTour ? "mt-3" : ""
+                  }`}
+                >
                   {showSampleTour ? (
                     <>
                       <EyeOff className="w-5 h-5 mr-2" />
@@ -662,6 +685,34 @@ const CodeketLanding = () => {
             </div>
           </div>
         </div>
+
+        {/* Fullscreen Modal */}
+        {isFullscreen && (
+          <div className="fixed inset-0 z-50 bg-black">
+            <div className="absolute top-4 right-4 z-10 flex gap-2">
+              <button
+                onClick={() => setIsFullscreen(false)}
+                className="btn btn-circle btn-accent"
+              >
+                <Minimize2 className="w-6 h-6" />
+              </button>
+              <button
+                onClick={() => {
+                  setIsFullscreen(false);
+                  setShowSampleTour(false);
+                }}
+                className="btn btn-circle btn-error"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <iframe
+              src="https://bishir-tm.github.io/sample-virtual-tour/"
+              title="Codeket Virtual Tour Sample - Fullscreen"
+              className="w-full h-full"
+            ></iframe>
+          </div>
+        )}
       </section>
 
       {/* Final CTA Section */}
