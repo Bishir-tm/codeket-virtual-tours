@@ -30,15 +30,27 @@ import {
   EyeOff,
   Maximize2,
   Minimize2,
+  Sun,
+  Moon,
+  Copy,
 } from "lucide-react";
 import BookingModal from "../components/BookingModal";
 
 const CodeketLanding = () => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("codeketlight");
   const [showSampleTour, setShowSampleTour] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [copied, setCopied] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showFullscreenHint, setShowFullscreenHint] = useState(false);
+
+  const handleCopy = (textToCopy, type) => {
+    navigator.clipboard.writeText(textToCopy);
+    setCopied(type);
+    setTimeout(() => setCopied(null), 2000);
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -50,6 +62,23 @@ const CodeketLanding = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [theme]);
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    if (showSampleTour && isMobile) {
+      setShowFullscreenHint(true);
+      const timer = setTimeout(() => {
+        setShowFullscreenHint(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSampleTour, isMobile]);
 
   const toggleTheme = () => {
     setTheme((prev) =>
@@ -275,7 +304,11 @@ const CodeketLanding = () => {
                 onClick={toggleTheme}
                 className="btn btn-ghost btn-circle hover:bg-base-200/50"
               >
-                {theme === "light" ? "🌙" : "☀️"}
+                {theme === "codeketlight" ? (
+                  <Moon className="w-6 h-6" />
+                ) : (
+                  <Sun className="w-6 h-6" />
+                )}
               </button>
               <button
                 className="btn btn-primary btn-sm px-8"
@@ -647,10 +680,16 @@ const CodeketLanding = () => {
                         e.stopPropagation();
                         setIsFullscreen(true);
                       }}
-                      className="absolute top-4 right-4 btn btn-sm btn-accent"
+                      className="absolute top-4 right-4 btn btn-sm btn-accent pulse-animation"
+                      title="Go Fullscreen"
                     >
                       <Maximize2 className="w-4 h-4" />
                     </button>
+                    {showFullscreenHint && (
+                      <div className="absolute top-16 right-4 bg-neutral text-neutral-content px-2 py-1 rounded text-xs">
+                        Tap to go fullscreen!
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="border-4 aspect-video bg-gradient-to-br from-white/10 to-transparent rounded-2xl flex items-center justify-center mb-8 group-hover:from-white/20 transition-colors">
@@ -733,20 +772,56 @@ const CodeketLanding = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-12">
-              <a
-                href="tel:+2349068149540"
-                className="group btn btn-primary btn-lg px-8 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
-              >
-                <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                Call or WhatsApp: +234 906 814 9540
-              </a>
-              <a
-                href="mailto:virtualtours@codeket.com"
-                className="group btn btn-outline btn-lg px-8 hover:scale-105 transition-all duration-300"
-              >
-                <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                virtualtours@codeket.com
-              </a>
+              <div className="relative group">
+                <a
+                  href="tel:+2349068149540"
+                  className="btn btn-primary btn-lg px-8 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                >
+                  <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                  Call or WhatsApp: +234 906 814 9540
+                </a>
+                <button
+                  onClick={() => handleCopy("+2349068149540", "phone")}
+                  className="absolute -right-2 -top-2 btn btn-xs btn-circle btn-neutral"
+                >
+                  {copied === "phone" ? (
+                    <Check className="w-4 h-4 text-success" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+                {copied === "phone" && (
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-neutral text-neutral-content px-2 py-1 rounded text-xs">
+                    Copied!
+                  </div>
+                )}
+              </div>
+              <div className="relative group">
+                <a
+                  href="mailto:virtualtours@codeket.com"
+                  className="btn btn-outline btn-lg px-8 hover:scale-105 transition-all duration-300"
+                >
+                  <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  virtualtours@codeket.com
+                </a>
+                <button
+                  onClick={() =>
+                    handleCopy("virtualtours@codeket.com", "email")
+                  }
+                  className="absolute -right-2 -top-2 btn btn-xs btn-circle btn-neutral"
+                >
+                  {copied === "email" ? (
+                    <Check className="w-4 h-4 text-success" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+                {copied === "email" && (
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-neutral text-neutral-content px-2 py-1 rounded text-xs">
+                    Copied!
+                  </div>
+                )}
+              </div>
             </div>
 
             <button
