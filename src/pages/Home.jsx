@@ -33,6 +33,10 @@ import {
   Sun,
   Moon,
   Copy,
+  Menu,
+  Twitter,
+  Linkedin,
+  Instagram,
 } from "lucide-react";
 import BookingModal from "../components/BookingModal";
 
@@ -42,9 +46,11 @@ const CodeketLanding = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const [copied, setCopied] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [showFullscreenHint, setShowFullscreenHint] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleCopy = (textToCopy, type) => {
     navigator.clipboard.writeText(textToCopy);
@@ -278,6 +284,7 @@ const CodeketLanding = () => {
               </div>
             </div>
 
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a
                 href="#features"
@@ -297,12 +304,19 @@ const CodeketLanding = () => {
               >
                 Process
               </a>
+              <a
+                href="#contact"
+                className="text-base-content/80 hover:text-primary transition-colors"
+              >
+                Contact
+              </a>
             </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Right-side controls */}
+            <div className="flex items-center space-x-2">
               <button
                 onClick={toggleTheme}
-                className="btn btn-ghost btn-circle hover:bg-base-200/50"
+                className="btn btn-circle btn-ghost"
               >
                 {theme === "codeketlight" ? (
                   <Moon className="w-6 h-6" />
@@ -310,21 +324,107 @@ const CodeketLanding = () => {
                   <Sun className="w-6 h-6" />
                 )}
               </button>
+
               <button
-                className="btn btn-primary btn-sm px-8"
+                className="btn btn-primary btn-sm px-8 hidden md:flex"
                 onClick={() => setIsBookingModalOpen(true)}
               >
                 <Camera className="w-5 h-5 mr-2" />
                 Let's Talk
               </button>
-              <BookingModal
-                isOpen={isBookingModalOpen}
-                onClose={() => setIsBookingModalOpen(false)}
-              />
+
+              {/* Mobile Menu Button */}
+              <div className="md:hidden">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="btn btn-circle btn-outline btn-ghost"
+                >
+                  <Menu className="w-6 h-6" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </nav>
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => {
+          setIsBookingModalOpen(false);
+          setSelectedPlan(null);
+        }}
+        selectedPlan={selectedPlan}
+      />
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[1000] bg-base-100/95 backdrop-blur-lg md:hidden">
+          <div className="container mx-auto px-6 py-4 h-full flex flex-col">
+            <div className="flex justify-between items-center mb-12">
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">C</span>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    Codeket
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn btn-circle btn-outline btn-ghost"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="flex flex-col items-center justify-center flex-1 space-y-8 text-center">
+              <a
+                href="#features"
+                className="text-3xl font-bold text-base-content/80 hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="text-3xl font-bold text-base-content/80 hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
+              </a>
+              <a
+                href="#process"
+                className="text-3xl font-bold text-base-content/80 hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Process
+              </a>
+              <a
+                href="#contact"
+                className="text-3xl font-bold text-base-content/80 hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </a>
+            </div>
+
+            <div className="text-center pb-8">
+              <button
+                className="btn btn-primary btn-lg px-8"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsBookingModalOpen(true);
+                }}
+              >
+                <Camera className="w-5 h-5 mr-2" />
+                Let's Talk
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-20 relative">
@@ -332,11 +432,11 @@ const CodeketLanding = () => {
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
             <div className="inline-flex my-5 items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-              <span className="text-sm font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Premium Virtual Tour Technology
               </span>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+              <div className="w-2 h-2 bg-accent rounded-full animate-ping"></div>
             </div>
 
             {/* Main Headline */}
@@ -370,7 +470,11 @@ const CodeketLanding = () => {
               </button>
               <BookingModal
                 isOpen={isBookingModalOpen}
-                onClose={() => setIsBookingModalOpen(false)}
+                onClose={() => {
+                  setIsBookingModalOpen(false);
+                  setSelectedPlan(null);
+                }}
+                selectedPlan={selectedPlan}
               />
               <a href="#sample-tour" className="btn btn-outline btn-lg px-8">
                 <Play className="w-5 h-5 mr-2" />
@@ -585,6 +689,10 @@ const CodeketLanding = () => {
                           ? "btn-primary shadow-lg hover:shadow-xl"
                           : "btn-outline hover:btn-primary"
                       } transition-all duration-300 hover:scale-105`}
+                      onClick={() => {
+                        setSelectedPlan(pkg.name);
+                        setIsBookingModalOpen(true);
+                      }}
                     >
                       Choose {pkg.name}
                     </button>
@@ -755,7 +863,10 @@ const CodeketLanding = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-32 bg-gradient-to-b from-base-200 to-base-100">
+      <section
+        id="contact"
+        className="py-32 bg-gradient-to-b from-base-200 to-base-100"
+      >
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-5xl lg:text-6xl font-bold mb-8">
@@ -835,7 +946,11 @@ const CodeketLanding = () => {
 
             <BookingModal
               isOpen={isBookingModalOpen}
-              onClose={() => setIsBookingModalOpen(false)}
+              onClose={() => {
+                setIsBookingModalOpen(false);
+                setSelectedPlan(null);
+              }}
+              selectedPlan={selectedPlan}
             />
 
             <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-base-content/60">
@@ -877,55 +992,35 @@ const CodeketLanding = () => {
                 businesses showcase their spaces.
               </p>
               <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <span className="text-sm font-semibold">Tw</span>
-                </div>
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <span className="text-sm font-semibold">Li</span>
-                </div>
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <span className="text-sm font-semibold">Ig</span>
-                </div>
+                <a href="https://twitter.com/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="https://linkedin.com/company/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://instagram.com/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
               </div>
             </div>
 
             <div>
-              <h3 className="font-bold text-lg mb-6">Services</h3>
+              <h3 className="font-bold text-lg mb-6">Quick Links</h3>
               <div className="space-y-3 opacity-80">
-                <p className="hover:text-primary transition-colors cursor-pointer">
-                  360° Photography
-                </p>
-                <p className="hover:text-primary transition-colors cursor-pointer">
-                  Virtual Walkthroughs
-                </p>
-                <p className="hover:text-primary transition-colors cursor-pointer">
-                  Interactive Tours
-                </p>
-                <p className="hover:text-primary transition-colors cursor-pointer">
-                  Custom Development
-                </p>
+                <a href="#features" className="block hover:text-primary transition-colors">Features</a>
+                <a href="#pricing" className="block hover:text-primary transition-colors">Pricing</a>
+                <a href="#process" className="block hover:text-primary transition-colors">How It Works</a>
+                <a href="#sample-tour" className="block hover:text-primary transition-colors">Sample Tour</a>
               </div>
             </div>
 
             <div>
-              <h3 className="font-bold text-lg mb-6">Contact</h3>
-              <div className="space-y-4 opacity-80">
-                <div className="flex items-center space-x-3 hover:text-primary transition-colors cursor-pointer">
-                  <Phone className="w-4 h-4" />
-                  <span>+234 906 814 9540</span>
-                </div>
-                <div className="flex items-center space-x-3 hover:text-primary transition-colors cursor-pointer">
-                  <Mail className="w-4 h-4" />
-                  <span>virtualtours@codeket.com</span>
-                </div>
-                <div className="flex items-center space-x-3 hover:text-primary transition-colors cursor-pointer">
-                  <MapPin className="w-4 h-4" />
-                  <span>Abuja, Nigeria</span>
-                </div>
-                <div className="flex items-center space-x-3 hover:text-primary transition-colors cursor-pointer">
-                  <Clock className="w-4 h-4" />
-                  <span>24/7 Support</span>
-                </div>
+              <h3 className="font-bold text-lg mb-6">Company</h3>
+              <div className="space-y-3 opacity-80">
+                <a href="https://codeket.com/about" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">About Codeket</a>
+                <a href="https://codeket.com/portfolio" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Our Portfolio</a>
+                <a href="https://codeket.com/blog" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Blog</a>
+                <a href="https://codeket.com/careers" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Careers</a>
               </div>
             </div>
           </div>
@@ -939,7 +1034,7 @@ const CodeketLanding = () => {
                   rights reserved.
                 </p>
                 <p className="text-sm mt-1">
-                  Transforming spaces into experiences since 2020
+                  A subsidiary of Codeket Inc.
                 </p>
               </div>
 
@@ -973,10 +1068,6 @@ const CodeketLanding = () => {
               <div className="flex items-center space-x-2 opacity-60">
                 <Shield className="w-5 h-5" />
                 <span className="text-sm">SSL Secured</span>
-              </div>
-              <div className="flex items-center space-x-2 opacity-60">
-                <Award className="w-5 h-5" />
-                <span className="text-sm">ISO Certified</span>
               </div>
               <div className="flex items-center space-x-2 opacity-60">
                 <CheckCircle2 className="w-5 h-5" />
