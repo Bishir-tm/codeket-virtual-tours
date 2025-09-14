@@ -992,13 +992,28 @@ const CodeketLanding = () => {
                 businesses showcase their spaces.
               </p>
               <div className="flex space-x-4">
-                <a href="https://twitter.com/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a
+                  href="https://twitter.com/codeket"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                >
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="https://linkedin.com/company/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a
+                  href="https://linkedin.com/company/codeket"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                >
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://instagram.com/codeket" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a
+                  href="https://instagram.com/codeket"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
+                >
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
@@ -1007,20 +1022,60 @@ const CodeketLanding = () => {
             <div>
               <h3 className="font-bold text-lg mb-6">Quick Links</h3>
               <div className="space-y-3 opacity-80">
-                <a href="#features" className="block hover:text-primary transition-colors">Features</a>
-                <a href="#pricing" className="block hover:text-primary transition-colors">Pricing</a>
-                <a href="#process" className="block hover:text-primary transition-colors">How It Works</a>
-                <a href="#sample-tour" className="block hover:text-primary transition-colors">Sample Tour</a>
+                <a
+                  href="#features"
+                  className="block hover:text-primary transition-colors"
+                >
+                  Features
+                </a>
+                <a
+                  href="#pricing"
+                  className="block hover:text-primary transition-colors"
+                >
+                  Pricing
+                </a>
+                <a
+                  href="#process"
+                  className="block hover:text-primary transition-colors"
+                >
+                  How It Works
+                </a>
+                <a
+                  href="#sample-tour"
+                  className="block hover:text-primary transition-colors"
+                >
+                  Sample Tour
+                </a>
               </div>
             </div>
 
             <div>
               <h3 className="font-bold text-lg mb-6">Company</h3>
               <div className="space-y-3 opacity-80">
-                <a href="https://codeket.com/about" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">About Codeket</a>
-                <a href="https://codeket.com/portfolio" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Our Portfolio</a>
-                <a href="https://codeket.com/blog" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Blog</a>
-                <a href="https://codeket.com/careers" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">Careers</a>
+                <a
+                  href="https://codeket.com/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-primary transition-colors"
+                >
+                  About Codeket
+                </a>
+                <a
+                  href="https://codeket.com/services"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-primary transition-colors"
+                >
+                  Our Services
+                </a>
+                <a
+                  href="https://codeket.com/consultation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-primary transition-colors"
+                >
+                  Consultation
+                </a>
               </div>
             </div>
           </div>
@@ -1033,9 +1088,7 @@ const CodeketLanding = () => {
                   &copy; {new Date().getFullYear()} Codeket Virtual Tours. All
                   rights reserved.
                 </p>
-                <p className="text-sm mt-1">
-                  A subsidiary of Codeket Inc.
-                </p>
+                <p className="text-sm mt-1">A subsidiary of Codeket Inc.</p>
               </div>
 
               <div className="flex items-center space-x-6 text-sm opacity-70">
