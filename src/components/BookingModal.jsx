@@ -93,7 +93,9 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
             </p>
             <a
               href={`https://wa.me/2349068149540?text=${encodeURIComponent(
-                `Hello! I'm interested in the ${selectedPlan || 'general'} plan.`
+                `Hello! I'm interested in the ${
+                  selectedPlan || "general"
+                } plan.`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -104,9 +106,16 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
             </a>
           </div>
 
-          {/* OR Separator */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {/* OR Separator - Different positioning for mobile vs desktop */}
+          <div className="absolute inset-0 items-center justify-center pointer-events-none hidden md:flex">
             <span className="bg-base-100 px-4 text-base-content/50 font-bold rounded-full shadow-lg z-10">
+              OR
+            </span>
+          </div>
+
+          {/* Mobile OR Separator */}
+          <div className="flex items-center justify-center py-4 md:hidden">
+            <span className="bg-base-100 px-4 text-base-content/50 font-bold rounded-full shadow-lg">
               OR
             </span>
           </div>
@@ -195,4 +204,3 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 };
 
 export default BookingModal;
-
