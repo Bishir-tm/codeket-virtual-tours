@@ -93,7 +93,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
             </p>
             <a
               href={`https://wa.me/2349068149540?text=${encodeURIComponent(
-                `Hello! I'm interested in the ${
+                `Hello! I'm interested in the codeket virtual tours${
                   selectedPlan || "general"
                 } plan.`
               )}`}
