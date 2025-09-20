@@ -879,17 +879,18 @@ const CodeketLanding = () => {
               close deals.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-12">
-              <div className="relative group">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+              {/* Phone */}
+              <div className="relative inline-block w-full sm:w-auto">
                 <a
-                  href="tel:+2349068149540"
-                  className="btn btn-primary btn-lg px-8 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                  href="tel:+2349063503232"
+                  className="btn btn-primary btn-lg w-full sm:w-auto px-8 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 >
                   <Phone className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                  Call or WhatsApp: +234 906 814 9540
+                  <span>+234 906 350 3232</span>
                 </a>
                 <button
-                  onClick={() => handleCopy("+2349068149540", "phone")}
+                  onClick={() => handleCopy("+2349063503232", "phone")}
                   className="absolute -right-2 -top-2 btn btn-xs btn-circle btn-neutral"
                 >
                   {copied === "phone" ? (
@@ -904,10 +905,12 @@ const CodeketLanding = () => {
                   </div>
                 )}
               </div>
-              <div className="relative group">
+
+              {/* Email */}
+              <div className="relative inline-block w-full sm:w-auto">
                 <a
                   href="mailto:virtualtours@codeket.com"
-                  className="btn btn-outline btn-lg px-8 hover:scale-105 transition-all duration-300"
+                  className="btn btn-outline btn-lg w-full sm:w-auto px-8 text-center hover:scale-105 transition-all duration-300"
                 >
                   <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                   virtualtours@codeket.com
@@ -932,14 +935,17 @@ const CodeketLanding = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => setIsBookingModalOpen(true)}
-              className="group btn btn-secondary btn-lg px-12 hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-secondary/25"
-            >
-              <Camera className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-              Book a Walkthrough Now
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
+            {/* Booking button */}
+            <div className="flex justify-center">
+              <button
+                onClick={() => setIsBookingModalOpen(true)}
+                className="group btn btn-secondary btn-lg px-12 hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-secondary/25 flex items-center"
+              >
+                <Camera className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                Book a Walkthrough Now
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
 
             <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-base-content/60">
               <div className="flex items-center gap-2">
