@@ -39,6 +39,7 @@ import {
   Instagram,
 } from "lucide-react";
 import BookingModal from "../components/BookingModal";
+import PanoramaViewer from "../components/PanoramaViewer";
 
 const CodeketLanding = () => {
   const [theme, setTheme] = useState("codeketlight");
@@ -164,61 +165,65 @@ const CodeketLanding = () => {
   const packages = [
     {
       name: "Starter",
-      subtitle: "Perfect for small spaces",
-      rooms: "Up to 3 rooms",
-      price: "₦100,000",
+      subtitle: "Best for smaller apartments",
+      propertyType: "1–3 bedroom flats",
+      price: "₦80,000",
       features: [
+        "Up to 3 key areas (living room, kitchen, bedroom)",
         "Professional 360° photography",
-        "Basic navigation",
-        "Mobile-responsive webpage",
-        "1 revision included",
+        "Mobile & desktop friendly tour link",
+        "Branded with your agency name/logo",
+        "Includes up to 1 round of adjustments",
       ],
       popular: false,
       gradient: "from-[#0A182E] to-[#1E2A38]",
     },
     {
       name: "Professional",
-      subtitle: "Most popular choice",
-      rooms: "4–8 rooms or sections",
-      price: "₦200,000",
+      subtitle: "Most popular choice for agents",
+      propertyType: "Luxury apartments & duplexes",
+      price: "₦150,000",
       features: [
-        "Advanced 360° capture",
-        "Enhanced navigation",
-        "Custom branding options",
-        "2 revisions included",
-        "Analytics dashboard",
+        "4–8 areas covered (entire property)",
+        "Smooth navigation & interactive hotspots",
+        "Custom branding with agency colors & logo",
+        "Buyer engagement tools (info tags, links)",
+        "Simple analytics dashboard to track views",
+        "Includes up to 2 rounds of adjustments",
       ],
       popular: true,
       gradient: "from-[#007AFF] to-[#00E6E6]",
     },
     {
       name: "Premium",
-      subtitle: "For larger properties",
-      rooms: "Up to 15 rooms + outdoor areas",
-      price: "₦350,000",
+      subtitle: "Perfect for large homes & estates",
+      propertyType: "Large duplexes & mini-estates",
+      price: "₦250,000",
       features: [
-        "Cinema-grade photography",
-        "Multi-floor navigation",
-        "Custom domain setup",
-        "3 revisions included",
-        "Priority support",
-        "SEO optimization",
+        "Up to 15 rooms + outdoor areas",
+        "Cinema-grade photography & multi-floor navigation",
+        "Drone 360 entry shot (optional)",
+        "Floor plan integration",
+        "Lead capture form for buyer inquiries",
+        "Includes up to 3 rounds of adjustments",
+        "Priority client support",
       ],
       popular: false,
       gradient: "from-[#8A2BE2] to-[#007AFF]",
     },
     {
       name: "Enterprise",
-      subtitle: "Large complexes",
-      rooms: "16+ rooms or multiple buildings",
-      price: "₦500,000",
+      subtitle: "For estates, hotels & commercial projects",
+      propertyType: "Large complexes & multi-unit developments",
+      price: "₦400,000",
       features: [
-        "Ultra-high resolution",
-        "Complex navigation systems",
-        "White-label solution",
-        "Unlimited revisions",
+        "16+ rooms or multiple buildings",
+        "Ultra-high resolution 360° coverage",
+        "Complex navigation system",
+        "White-label solution (your branding only)",
         "Dedicated project manager",
-        "Custom integrations",
+        "Custom integrations with your website or CRM",
+        "Unlimited adjustments until launch",
       ],
       popular: false,
       gradient: "from-[#00E6E6] to-[#8A2BE2]",
@@ -252,22 +257,24 @@ const CodeketLanding = () => {
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${theme}`}>
-      {/* Animated Background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
-        <div
-          className="absolute w-96 h-96 rounded-full opacity-10 blur-3xl transition-all duration-1000 ease-out"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(0,122,255,0.3) 0%, transparent 70%)",
-            left: mousePosition.x - 192,
-            top: mousePosition.y - 192,
-          }}
-        ></div>
+      {/* Hero Background Iframe */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: 0,
+        }}
+      >
+        <PanoramaViewer />
       </div>
+      {/* ddd */}
+      <div className="absolute inset-0 bg-black/30 z-0"></div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-base-100/80 border-b border-base-300/20">
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-base-100/10 border-b border-base-300/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -429,30 +436,29 @@ const CodeketLanding = () => {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-20 relative">
         <div className="container mx-auto px-6 text-center relative z-10">
+          {/* <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-xl px-4 py-3 hover:scale-105 transition-transform"> */}
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
             <div className="inline-flex my-5 items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <Sparkles className="w-5 h-5 text-white/60" />
+              <span className="text-sm font-medium bg-gradient-to-r from-white to-codeket-silver bg-clip-text text-transparent">
                 Premium Virtual Tour Technology
               </span>
-              <div className="w-2 h-2 bg-accent rounded-full animate-ping"></div>
+              <div className="w-2 h-2 bg-codeket-silver rounded-full animate-ping"></div>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-6xl lg:text-8xl font-bold mb-8 leading-tight">
-              <span className="text-base-content">Let Your Clients </span>
-              <span className="text-base-content ">
-                Walk Through Your Space
+            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+              <span className="text-white text-shadow">
+                Let Your Clients Walk Through Your Space
               </span>
-              <br />
-              <span className="bg-gradient-to-r from-accent via-error to-primary bg-clip-text text-transparent">
+              <div className="bg-gradient-to-r from-accent via-codeket-electricBlue to-codeket-electricBlue bg-clip-text text-transparent">
                 From Anywhere
-              </span>
+              </div>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl lg:text-2xl text-base-content/70 mb-12 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed text-codeket-silver/90">
               Interactive 360° virtual tours for buildings, homes, schools, and
               warehouses. Give people the power to explore your property room by
               room — from their phone or computer.
@@ -461,7 +467,7 @@ const CodeketLanding = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <button
-                className="btn btn-primary btn-lg px-8"
+                className="btn btn-sm lg:btn-lg px-8 "
                 onClick={() => setIsBookingModalOpen(true)}
               >
                 <Camera className="w-5 h-5 mr-2" />
@@ -476,7 +482,10 @@ const CodeketLanding = () => {
                 }}
                 selectedPlan={selectedPlan}
               />
-              <a href="#sample-tour" className="btn btn-outline btn-lg px-8">
+              <a
+                href="#sample-tour"
+                className="btn bg-black/35 border-codeket-electricBlue text-codeket-electricBlue border-2  btn-sm lg:btn-lg px-8"
+              >
                 <Play className="w-5 h-5 mr-2" />
                 View Sample Tour
               </a>
@@ -505,6 +514,7 @@ const CodeketLanding = () => {
               })}
             </div>
           </div>
+          {/* </div> */}
         </div>
 
         {/* Floating Elements */}
@@ -1081,7 +1091,7 @@ const CodeketLanding = () => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <div className="text-center md:text-left opacity-70">
                 <p>
@@ -1117,7 +1127,7 @@ const CodeketLanding = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex justify-center items-center space-x-8 mt-8 pt-8 border-t border-white/10">
+            <div className="flex justify-center items-center space-x-8 mt-8 pt-8 border-t ">
               <div className="flex items-center space-x-2 opacity-60">
                 <Shield className="w-5 h-5" />
                 <span className="text-sm">SSL Secured</span>

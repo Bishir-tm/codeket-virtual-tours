@@ -64,7 +64,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
-      <div className="modal-box bg-base-100 rounded-3xl shadow-2xl border border-base-300/20 max-w-4xl w-full p-8 ">
+      <div className="modal-box rounded-3xl shadow-2xl border border-base-300/20 max-w-4xl w-full p-8 ">
         <button
           onClick={onClose}
           className="btn btn-md btn-circle btn-outline absolute top-4 right-4 text-base-content/60 z-[1000]"
@@ -92,8 +92,8 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
               Get instant answers and discuss your project directly.
             </p>
             <a
-              href={`https://wa.me/2349068149540?text=${encodeURIComponent(
-                `Hello! I'm interested in the codeket virtual tours${
+              href={`https://wa.me/2349063503232?text=${encodeURIComponent(
+                `Hello! I'm interested in the codeket virtual tours ${
                   selectedPlan || "general"
                 } plan.`
               )}`}
