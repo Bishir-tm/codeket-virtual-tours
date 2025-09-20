@@ -6,6 +6,7 @@ import {
   Home,
   Building2,
   School,
+  LucideHeadphones,
   Warehouse,
   Hotel,
   ShoppingBag,
@@ -38,6 +39,7 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
+
 import BookingModal from "../components/BookingModal";
 import PanoramaViewer from "../components/PanoramaViewer";
 
@@ -257,32 +259,18 @@ const CodeketLanding = () => {
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${theme}`}>
-      {/* Hero Background Iframe */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-        }}
-      >
-        <PanoramaViewer />
-      </div>
-      {/* ddd */}
-      <div className="absolute inset-0 bg-black/30 z-0"></div>
-
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-base-100/10 border-b border-base-300/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">C</span>
-              </div>
+              <img
+                src="/virtual-tours-logo.png"
+                alt="Codeket Logo"
+                className="w-10 h-10 rounded-xl object-contain"
+              />{" "}
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <div className="text-2xl font-bold text-codeket-electricBlue">
                   Codeket
                 </div>
                 <div className="text-xs text-base-content/60 -mt-1">
@@ -336,7 +324,7 @@ const CodeketLanding = () => {
                 className="btn btn-primary btn-sm px-8 hidden md:flex"
                 onClick={() => setIsBookingModalOpen(true)}
               >
-                <Camera className="w-5 h-5 mr-2" />
+                <LucideHeadphones className="w-5 h-5 mr-2" />
                 Let's Talk
               </button>
 
@@ -433,88 +421,87 @@ const CodeketLanding = () => {
         </div>
       )}
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 relative">
-        <div className="container mx-auto px-6 text-center relative z-10">
-          {/* <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-xl px-4 py-3 hover:scale-105 transition-transform"> */}
-          <div className="max-w-5xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex my-5 items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 mb-8 hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5 text-white/60" />
-              <span className="text-sm font-medium bg-gradient-to-r from-white to-codeket-silver bg-clip-text text-transparent">
-                Premium Virtual Tour Technology
-              </span>
-              <div className="w-2 h-2 bg-codeket-silver rounded-full animate-ping"></div>
-            </div>
+      {/* Hero Section - FIXED for mobile */}
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Hero Background */}
+        <div className="absolute inset-0 z-0">
+          <PanoramaViewer />
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
 
-            {/* Main Headline */}
-            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
-              <span className="text-white text-shadow">
-                Let Your Clients Walk Through Your Space
-              </span>
-              <div className="bg-gradient-to-r from-accent via-codeket-electricBlue to-codeket-electricBlue bg-clip-text text-transparent">
-                From Anywhere
+        {/* Hero Content - Fixed container */}
+        <div className="relative z-10 min-h-screen flex items-center justify-center pt-20">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <div className="max-w-5xl mx-auto">
+              {/* Badge */}
+              <div className="inline-flex my-5 items-center space-x-2 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-4 sm:px-6 py-3 mb-6 sm:mb-8 hover:scale-105 transition-transform">
+                <Sparkles className="w-4 sm:w-5 h-4 sm:h-5 text-white/60" />
+                <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  Premium Virtual Tour Technology
+                </span>
+                <div className="w-2 h-2 bg-gray-300 rounded-full animate-ping"></div>
               </div>
-            </h1>
 
-            {/* Subtitle */}
-            <p className="text-xl lg:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed text-codeket-silver/90">
-              Interactive 360° virtual tours for buildings, homes, schools, and
-              warehouses. Give people the power to explore your property room by
-              room — from their phone or computer.
-            </p>
+              {/* Main Headline */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2">
+                <span className="text-white drop-shadow-2xl">
+                  Let Your Clients Walk Through Your Space
+                </span>
+                <div className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  From Anywhere
+                </div>
+              </h1>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button
-                className="btn btn-sm lg:btn-lg px-8 "
-                onClick={() => setIsBookingModalOpen(true)}
-              >
-                <Camera className="w-5 h-5 mr-2" />
-                Book a Walkthrough Project
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </button>
-              <BookingModal
-                isOpen={isBookingModalOpen}
-                onClose={() => {
-                  setIsBookingModalOpen(false);
-                  setSelectedPlan(null);
-                }}
-                selectedPlan={selectedPlan}
-              />
-              <a
-                href="#sample-tour"
-                className="btn bg-black/35 border-codeket-electricBlue text-codeket-electricBlue border-2  btn-sm lg:btn-lg px-8"
-              >
-                <Play className="w-5 h-5 mr-2" />
-                View Sample Tour
-              </a>
-            </div>
+              {/* Subtitle */}
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed text-gray-200 px-4">
+                Interactive 360° virtual tours for buildings, homes, schools,
+                and warehouses. Give people the power to explore your property
+                room by room — from their phone or computer.
+              </p>
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div
-                    key={index}
-                    className="text-center group hover:scale-105 transition-transform"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:rotate-6 transition-transform">
-                      <Icon className="w-6 h-6 text-primary" />
+              {/* CTAs - FIXED for mobile */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
+                <button
+                  className="btn btn-primary btn-sm sm:btn-md lg:btn-lg px-6 sm:px-8 w-full sm:w-auto min-h-[3rem] text-sm sm:text-base"
+                  onClick={() => setIsBookingModalOpen(true)}
+                >
+                  <Camera className="w-4 sm:w-5 h-4 sm:h-5 mr-2 flex-shrink-0" />
+                  <span className="truncate">Book a Walkthrough Project</span>
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2 flex-shrink-0" />
+                </button>
+                <a
+                  href="#sample-tour"
+                  className="btn bg-black/35 border-cyan-400 text-cyan-400 border-2 btn-sm sm:btn-md lg:btn-lg px-6 sm:px-8 w-full sm:w-auto min-h-[3rem] text-sm sm:text-base"
+                >
+                  <Play className="w-4 sm:w-5 h-4 sm:h-5 mr-2 flex-shrink-0" />
+                  <span className="truncate">View Sample Tour</span>
+                </a>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="bg-black/0 backdrop-blur-sm  rounded-2xl mb-4 p-6 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-3xl mx-auto px-4">
+                {stats.map((stat, index) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="text-center group hover:scale-105 transition-transform"
+                    >
+                      <div className="w-10 sm:w-12 h-10 sm:h-12 bg-info rounded-xl flex items-center justify-center mx-auto mb-2 sm:mb-3 group-hover:rotate-6 transition-transform">
+                        <Icon className="w-5 sm:w-6 h-5 sm:h-6 text-primary-content" />
+                      </div>
+                      <div className="text-lg sm:text-2xl font-bold text-info">
+                        {stat.number}
+                      </div>
+                      <div className="text-xs sm:text-sm text-white/80">
+                        {stat.label}
+                      </div>
                     </div>
-                    <div className="text-2xl font-bold text-primary">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-base-content/60">
-                      {stat.label}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
-          {/* </div> */}
         </div>
 
         {/* Floating Elements */}
@@ -676,7 +663,7 @@ const CodeketLanding = () => {
                       <div className="text-4xl font-bold text-primary mb-2">
                         {pkg.price}
                       </div>
-                      <p className="text-base-content/70">{pkg.rooms}</p>
+                      <p className="text-base-content/70">{pkg.propertyType}</p>
                     </div>
 
                     <div className="space-y-4 mb-8">
@@ -954,15 +941,6 @@ const CodeketLanding = () => {
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
 
-            <BookingModal
-              isOpen={isBookingModalOpen}
-              onClose={() => {
-                setIsBookingModalOpen(false);
-                setSelectedPlan(null);
-              }}
-              selectedPlan={selectedPlan}
-            />
-
             <div className="mt-8 flex flex-wrap justify-center gap-8 text-sm text-base-content/60">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -987,14 +965,16 @@ const CodeketLanding = () => {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">C</span>
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                  <img
+                    src="/virtual-tours-logo.png"
+                    alt="Codeket Logo"
+                    className="w-10 h-10 rounded-xl object-contain"
+                  />
                 </div>
                 <div>
                   <div className="text-3xl font-bold">Codeket</div>
-                  <div className="text-sm opacity-70">
-                    Virtual Tour Specialists
-                  </div>
+                  <div className="text-sm opacity-70">Virtual Tours</div>
                 </div>
               </div>
               <p className="text-lg opacity-80 mb-6 max-w-md">
